@@ -7,11 +7,11 @@ export const isOwner = async (req: express.Request, res: express.Response, next:
         const { id } = req.params
         const currentUserId = get(req, 'identity._id') as string
         if (!currentUserId) {
-            return res.sendStatus(403)
+            return res.status(403).send("this id does not exist")
         }
 
         if (currentUserId.toString() != id) {
-            return res.sendStatus(403)
+            return res.status(403).send("you cannot delete a diffrent user")
 
         }
         next()
